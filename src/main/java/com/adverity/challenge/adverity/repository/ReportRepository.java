@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 
 /**
- * @author Piotr Lechnio <p.lechnio@webellian.com>
+ * @author Piotr Lechnio <plechnio@gmail.com>
  */
 
 
