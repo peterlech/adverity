@@ -7,10 +7,10 @@ package com.adverity.challenge.adverity.controller;
  */
 public enum ReportRequestParamsEnum {
 
+    ID,
+    AGGREGATEID,
     DATASOURCE,
     CAMPAIGN,
     DAILY,
-    METRICID,
-    AGGREGATEID,
-    ID
+    METRICID
 }
