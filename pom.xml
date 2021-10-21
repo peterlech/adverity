@@ -19,23 +19,21 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc8</artifactId>
-			<version>19.3</version>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jooq</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -74,6 +72,11 @@
 			<artifactId>flyway-core</artifactId>
 			<version>7.15.0</version>
 		</dependency>
+		<dependency>
+			<groupId>com.amazon.redshift</groupId>
+			<artifactId>redshift-jdbc42</artifactId>
+			<version>2.1.0.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -81,6 +84,41 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.jooq</groupId>
+				<artifactId>jooq-codegen-maven</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<jdbc>
+								<driver>com.amazon.redshift.jdbc42.Driver</driver>
+								<url>jdbc:redshift://adverity-redshift.cxeagdk3iho4.eu-central-1.redshift.amazonaws.com:5439/dev</url>
+								<user>adverity</user>
+								<password>Adverity1!</password>
+							</jdbc>
+							<generator>
+								<target>
+									<packageName>com.adverity.challenge.adverity.database</packageName>
+									<directory>src/main/java</directory>
+								</target>
+								<database>
+									<inputSchema>public</inputSchema>
+									<properties>
+										<property>
+											<key>dialect</key>
+											<value>org.jooq.meta.redshift.RedshiftDatabase</value>
+										</property>
+									</properties>
+								</database>
+							</generator>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
