@@ -32,8 +32,14 @@ public class ReportServiceImpl implements ReportService {
 
     if (requestDTO.getAggregateId() != null) {
       condition = condition.and(
-          ifactAggregateView.AGGREGATEID.equalIgnoreCase(requestDTO.getAggregateId().toString()));
+          ifactAggregateView.AGGREGATEID.in(requestDTO.getAggregateId()));
     }
+
+    if(requestDTO.getMetricId() != null){
+      condition = condition.and(
+          ifactAggregateView.METRICID.in(requestDTO.getMetricId()));
+    }
+
     if (requestDTO.getDatasource() != null && !requestDTO.getDatasource().isEmpty()) {
       condition = condition
           .and(ifactAggregateView.DATASOURCE.equalIgnoreCase((requestDTO.getDatasource())));
@@ -42,8 +48,11 @@ public class ReportServiceImpl implements ReportService {
       condition = condition
           .and(ifactAggregateView.CAMPAIGN.equalIgnoreCase((requestDTO.getCampaign())));
     }
-    if (requestDTO.getDaily() != null && !requestDTO.getDaily().isEmpty()) {
-      condition = condition.and(ifactAggregateView.DAILY.equalIgnoreCase((requestDTO.getDaily())));
+    if (requestDTO.getStartDate() != null) {
+      condition = condition.and(ifactAggregateView.DAILY.greaterOrEqual(requestDTO.getStartDate()));
+    }
+    if (requestDTO.getEndDate() != null) {
+      condition = condition.and(ifactAggregateView.DAILY.lessOrEqual(requestDTO.getEndDate()));
     }
 
     Result<IfactAggregateViewRecord> records =
@@ -56,8 +65,14 @@ public class ReportServiceImpl implements ReportService {
   }
 
   private ReportDTO mapToDTO(IfactAggregateViewRecord record) {
-    return new ReportDTO(record.getDatasource(), record.getCampaign(), record.getDaily(),
-        record.getAggregate(), record.getMetric(), Long.parseLong(record.getValue().toString()));
+    return ReportDTO.builder()
+        .datasource(record.getDatasource())
+        .campaign(record.getCampaign())
+        .daily(record.getDaily())
+        .aggregate(record.getAggregate())
+        .metric(record.getMetric())
+        .value(record.getValue().doubleValue())
+        .build();
   }
 
 }

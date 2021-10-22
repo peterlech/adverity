@@ -8,6 +8,7 @@ import com.adverity.challenge.adverity.database.Keys;
 import com.adverity.challenge.adverity.database.Public;
 import com.adverity.challenge.adverity.database.tables.records.CalendarDimRecord;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class CalendarDim extends TableImpl<CalendarDimRecord> {
     /**
      * The column <code>public.calendar_dim.day</code>.
      */
-    public final TableField<CalendarDimRecord, String> DAY = createField(DSL.name("day"), SQLDataType.VARCHAR(20), this, "");
+    public final TableField<CalendarDimRecord, LocalDate> DAY = createField(DSL.name("day"), SQLDataType.LOCALDATE, this, "");
 
     private CalendarDim(Name alias, Table<CalendarDimRecord> aliased) {
         this(alias, aliased, null);
@@ -137,7 +138,7 @@ public class CalendarDim extends TableImpl<CalendarDimRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row2<Object, String> fieldsRow() {
+    public Row2<Object, LocalDate> fieldsRow() {
         return (Row2) super.fieldsRow();
     }
 }

@@ -1,21 +1,27 @@
 package com.adverity.challenge.adverity.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDate;
+import java.util.List;
+import lombok.Value;
 
 /**
  * Entity representing the request body
  *
  * @author Piotr Lechnio <plechnio@gmail.com>
  */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Value
 public class RequestDTO {
 
-  private Integer aggregateId;
-  private String datasource;
-  private String campaign;
-  private String daily;
+
+  List<Integer> aggregateId;
+  List<Integer> metricId;
+  String datasource;
+  String campaign;
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "YYYY-MM-DD")
+  LocalDate startDate;
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "YYYY-MM-DD")
+  LocalDate endDate;
 }
+

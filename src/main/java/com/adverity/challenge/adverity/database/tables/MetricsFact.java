@@ -8,6 +8,7 @@ import com.adverity.challenge.adverity.database.Keys;
 import com.adverity.challenge.adverity.database.Public;
 import com.adverity.challenge.adverity.database.tables.records.MetricsFactRecord;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -66,10 +67,9 @@ public class MetricsFact extends TableImpl<MetricsFactRecord> {
     public final TableField<MetricsFactRecord, Object> METRICID = createField(DSL.name("metricid"), SQLDataType.OTHER, this, "");
 
     /**
-     * @deprecated Unknown data type. Please define an explicit {@link org.jooq.Binding} to specify how this type should be handled. Deprecation can be turned off using {@literal <deprecationOnUnknownTypes/>} in your code generator configuration.
+     * The column <code>public.metrics_fact.value</code>.
      */
-    @Deprecated
-    public final TableField<MetricsFactRecord, Object> VALUE = createField(DSL.name("value"), SQLDataType.OTHER, this, "");
+    public final TableField<MetricsFactRecord, BigDecimal> VALUE = createField(DSL.name("value"), SQLDataType.NUMERIC(20, 10), this, "");
 
     private MetricsFact(Name alias, Table<MetricsFactRecord> aliased) {
         this(alias, aliased, null);
@@ -150,7 +150,7 @@ public class MetricsFact extends TableImpl<MetricsFactRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row4<Object, Object, Object, Object> fieldsRow() {
+    public Row4<Object, Object, Object, BigDecimal> fieldsRow() {
         return (Row4) super.fieldsRow();
     }
 }

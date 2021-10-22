@@ -7,6 +7,9 @@ package com.adverity.challenge.adverity.database.tables;
 import com.adverity.challenge.adverity.database.Public;
 import com.adverity.challenge.adverity.database.tables.records.IfactAggregateViewRecord;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Name;
@@ -56,7 +59,7 @@ public class IfactAggregateView extends TableImpl<IfactAggregateViewRecord> {
     /**
      * The column <code>public.ifact_aggregate_view.daily</code>.
      */
-    public final TableField<IfactAggregateViewRecord, String> DAILY = createField(DSL.name("daily"), SQLDataType.VARCHAR(20), this, "");
+    public final TableField<IfactAggregateViewRecord, LocalDate> DAILY = createField(DSL.name("daily"), SQLDataType.LOCALDATE, this, "");
 
     /**
      * The column <code>public.ifact_aggregate_view.campaign</code>.
@@ -86,10 +89,9 @@ public class IfactAggregateView extends TableImpl<IfactAggregateViewRecord> {
     public final TableField<IfactAggregateViewRecord, String> METRIC = createField(DSL.name("metric"), SQLDataType.VARCHAR(255), this, "");
 
     /**
-     * @deprecated Unknown data type. Please define an explicit {@link org.jooq.Binding} to specify how this type should be handled. Deprecation can be turned off using {@literal <deprecationOnUnknownTypes/>} in your code generator configuration.
+     * The column <code>public.ifact_aggregate_view.value</code>.
      */
-    @Deprecated
-    public final TableField<IfactAggregateViewRecord, Object> VALUE = createField(DSL.name("value"), SQLDataType.OTHER, this, "");
+    public final TableField<IfactAggregateViewRecord, BigDecimal> VALUE = createField(DSL.name("value"), SQLDataType.NUMERIC(20, 10), this, "");
 
     private IfactAggregateView(Name alias, Table<IfactAggregateViewRecord> aliased) {
         this(alias, aliased, null);
@@ -160,7 +162,7 @@ public class IfactAggregateView extends TableImpl<IfactAggregateViewRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row9<Object, String, String, String, Object, String, Object, String, Object> fieldsRow() {
+    public Row9<Object, String, LocalDate, String, Object, String, Object, String, BigDecimal> fieldsRow() {
         return (Row9) super.fieldsRow();
     }
 }

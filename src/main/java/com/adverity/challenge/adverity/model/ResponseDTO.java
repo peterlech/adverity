@@ -1,23 +1,20 @@
 package com.adverity.challenge.adverity.model;
 
 import java.util.List;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Value;
 
 /**
  * Application will always return this objects of these class.
  *
  * @author Piotr Lechnio <plechnio@gmail.com>
  */
-@Data
+@Value
+@Builder
 public class ResponseDTO {
 
-  private String message;
-  private String code;
-  private List<ReportDTO> data;
+  String message;
+  String code;
+  List<ReportDTO> data;
 
-  public ResponseDTO(String message, String code, List<ReportDTO> data) {
-    this.message = message;
-    this.code = code;
-    this.data = data;
-  }
 }

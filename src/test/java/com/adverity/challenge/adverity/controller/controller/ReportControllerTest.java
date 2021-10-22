@@ -38,7 +38,7 @@ public class ReportControllerTest {
    */
   @Test
   public void OK() throws Exception {
-    ResponseEntity<ResponseDTO> results = controller.getReport(new RequestDTO());
+    ResponseEntity<ResponseDTO> results = controller.getReport(null);
     assert results.getStatusCode() == HttpStatus.OK;
   }
 }

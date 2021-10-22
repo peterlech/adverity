@@ -1,8 +1,9 @@
 package com.adverity.challenge.adverity.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import lombok.Builder;
+import lombok.Value;
 
 /**
  * Entity representing the record in the database in IFACT_AGGREGATE_VIEW table
@@ -10,16 +11,15 @@ import lombok.NoArgsConstructor;
  * @author Piotr Lechnio <plechnio@gmail.com>
  */
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Value
+@Builder
 public class ReportDTO {
 
-  private String datasource;
-  private String campaign;
-  private String daily;
-  private String aggregate;
-  private String metric;
-  private long value;
+  String datasource;
+  String campaign;
+  LocalDate daily;
+  String aggregate;
+  String metric;
+  double value;
 
 }

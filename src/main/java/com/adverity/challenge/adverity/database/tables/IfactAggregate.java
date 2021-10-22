@@ -8,6 +8,7 @@ import com.adverity.challenge.adverity.database.Keys;
 import com.adverity.challenge.adverity.database.Public;
 import com.adverity.challenge.adverity.database.tables.records.IfactAggregateRecord;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -84,10 +85,9 @@ public class IfactAggregate extends TableImpl<IfactAggregateRecord> {
     public final TableField<IfactAggregateRecord, Object> METRICID = createField(DSL.name("metricid"), SQLDataType.OTHER, this, "");
 
     /**
-     * @deprecated Unknown data type. Please define an explicit {@link org.jooq.Binding} to specify how this type should be handled. Deprecation can be turned off using {@literal <deprecationOnUnknownTypes/>} in your code generator configuration.
+     * The column <code>public.ifact_aggregate.value</code>.
      */
-    @Deprecated
-    public final TableField<IfactAggregateRecord, Object> VALUE = createField(DSL.name("value"), SQLDataType.OTHER, this, "");
+    public final TableField<IfactAggregateRecord, BigDecimal> VALUE = createField(DSL.name("value"), SQLDataType.NUMERIC(20, 10), this, "");
 
     private IfactAggregate(Name alias, Table<IfactAggregateRecord> aliased) {
         this(alias, aliased, null);
@@ -168,7 +168,7 @@ public class IfactAggregate extends TableImpl<IfactAggregateRecord> {
     // -------------------------------------------------------------------------
 
     @Override
-    public Row7<Object, Object, Object, Object, Object, Object, Object> fieldsRow() {
+    public Row7<Object, Object, Object, Object, Object, Object, BigDecimal> fieldsRow() {
         return (Row7) super.fieldsRow();
     }
 }
