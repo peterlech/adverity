@@ -7,8 +7,7 @@ create TABLE IFACT ( ID integer identity(1, 1), DATASOURCE_ID integer, CAMPAIGN_
 create TABLE METRICS_DFNTN ( ID integer identity(1, 1), NAME varchar(255), DESCRIPTION varchar(255), primary key(id) );
 create TABLE IFACT_AGGREGATE ( ID integer identity(1, 1), DATASOURCEID integer, CAMPAIGNID integer, CALENDARID integer, AGGREGATEID integer, METRICID integer, VALUE numeric(20, 10), primary key(id), foreign key(DATASOURCEID) references datasource_dim(id), foreign key(CAMPAIGNID) references campaign_dim(id), foreign key(CALENDARID) references calendar_dim(id), foreign key(AGGREGATEID) references aggregate_dfntn(id), foreign key(METRICID) references metrics_dfntn(id) );
 create TABLE METRICS_FACT ( ID integer identity(1, 1), FACTID integer, METRICID integer, VALUE numeric(20, 10), primary key(id), foreign key(METRICID) references metrics_dfntn(id), foreign key(FACTID) references ifact(id) ) ;
-create
-or replace view IFACT_AGGREGATE_VIEW (ID, DATASOURCE, DAILY, CAMPAIGN, AGGREGATEID, AGGREGATE, METRICID, METRIC, VALUE) as
+create materialized view IFACT_AGGREGATE_VIEW (ID, DATASOURCE, DAILY, CAMPAIGN, AGGREGATEID, AGGREGATE, METRICID, METRIC, VALUE) as
 select
    ia.id as ID,
    dd.name as DATASOURCE,
